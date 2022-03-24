@@ -1,6 +1,6 @@
 const getActiveRooms = async (io) => {
   let rooms = await io.sockets.adapter.rooms;
-  if(rooms.size === 0) return [];
+  if (rooms.size === 0) return [];
   const arr = Array.from(rooms);
   const filtered = arr.filter((room) => !room[1].has(room[0]));
   const res = filtered.map((i) => i[0]);
@@ -16,7 +16,10 @@ const getPlayersInRoom = (io, roomId) => {
   }
 };
 
+const randomArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
 module.exports = {
   getActiveRooms,
   getPlayersInRoom,
+  randomArray,
 };

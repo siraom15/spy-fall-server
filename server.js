@@ -4,7 +4,12 @@ const app = require("./app");
 const debug = require("debug")("sv:server");
 const http = require("http");
 const port = normalizePort(process.env.PORT || "4000");
-const { getPlayersInRoom, getActiveRooms } = require("./utils/index");
+const {
+  getPlayersInRoom,
+  getActiveRooms,
+  randomArray,
+} = require("./utils/index");
+const { placeRole } = require("./data/placeRole");
 
 app.set("port", port);
 console.log("Server run on port " + port);
@@ -26,8 +31,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("create_room", async (data) => {
-    console.log(socket.id + " create room " + data.roomId);
     if (data) {
+      console.log(socket.id + " create room " + data.roomId);
       // left all room
       let joined_room = Array.from(socket.rooms);
       if (joined_room > 0) {
@@ -40,10 +45,13 @@ io.on("connection", (socket) => {
       await socket.join(data.roomId);
 
       // init player
-      const players = await getPlayersInRoom(io, data.roomId).map((e) => ({
-        socketId: e,
-        isReady: false,
-      }));
+      const players = [
+        {
+          socketId: socket.id,
+          name: data.player.name,
+          isHost: true,
+        },
+      ];
 
       // notify
       socket.emit("created_room", {
@@ -55,7 +63,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join_room", async (data) => {
-    console.log(socket.id + " join room " + data.roomId);
     // join
     if (data) {
       // left all room
@@ -67,8 +74,8 @@ io.on("connection", (socket) => {
       }
 
       // check is room exist
-      let activeRoom = await getActiveRooms(io);
-      if (!Array.from(io.sockets.adapter.rooms).includes(data.roomId)) {
+      let activeRooms = await getActiveRooms(io);
+      if (!activeRooms.includes(data.roomId)) {
         console.log(`fail to join room ${data.roomId}`);
         socket.emit("failed_join_room", {
           msg: "Join room failed ( No exist room )",
@@ -76,16 +83,18 @@ io.on("connection", (socket) => {
         });
       } else {
         await socket.join(data.roomId);
-        socket.emit("joined_room", {
-          msg: "Join room success",
-          roomId: data.roomId,
-        });
 
-        // init player
+        // update
         const players = getPlayersInRoom(io, data.roomId).map((e) => ({
           socketId: e,
           isReady: false,
         }));
+
+        socket.emit("joined_room", {
+          msg: "Join room success",
+          roomId: data.roomId,
+          players,
+        });
 
         // send update to all
         socket.to(data.roomId).emit("update_player_room", {
@@ -96,20 +105,16 @@ io.on("connection", (socket) => {
       }
     }
   });
+
   socket.on("leave_room", async (data) => {
     // leave
     if (data) {
-      await socket.leave(data.roomId);
-      socket.emit("left_room", {
-        msg: "Leave room success",
-        roomId: data.roomId,
-      });
-
-      // init player
-      const players = getPlayersInRoom(io, data.roomId).map((e) => ({
-        socketId: e,
-        isReady: false,
-      }));
+      const players = getPlayersInRoom(io, data.roomId)
+        .filter((e) => e != socket.id)
+        .map((e) => ({
+          socketId: e,
+          isReady: false,
+        }));
 
       // send update to all
       socket.to(data.roomId).emit("update_player_room", {
@@ -118,7 +123,14 @@ io.on("connection", (socket) => {
         players,
       });
     }
+
+    await socket.leave(data.roomId);
+    socket.emit("left_room", {
+      msg: "Leave room success",
+      roomId: data.roomId,
+    });
   });
+
   socket.on("update_player_ready", (data) => {
     console.log(socket.id + " update player ready " + data.roomId);
     if (data) {
@@ -136,6 +148,18 @@ io.on("connection", (socket) => {
       });
     }
   });
+
+  socket.on("start_game", async (data) => {
+    if (data) {
+      // notify to everyone
+      console.log(randomArray(placeRole));
+      io.to(data.roomId).emit("started_game", {
+        msg: "Game Started",
+        place: randomArray(placeRole),
+      });
+    }
+  });
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
