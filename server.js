@@ -8,6 +8,7 @@ const {
   getPlayersInRoom,
   getActiveRooms,
   randomArray,
+  randomnumber,
 } = require("./utils/index");
 const { placeRole } = require("./data/placeRole");
 
@@ -152,11 +153,34 @@ io.on("connection", (socket) => {
   socket.on("start_game", async (data) => {
     if (data) {
       // notify to everyone
-      console.log(randomArray(placeRole));
       io.to(data.roomId).emit("started_game", {
         msg: "Game Started",
-        place: randomArray(placeRole),
       });
+
+      // get players in room
+      const players = await getPlayersInRoom(io, data.roomId);
+
+      // assign role & place to players
+      let rolePlace = await randomArray(placeRole);
+
+      let location = rolePlace.location;
+      let roles = rolePlace.roles.slice(0, players.length);
+
+      // random spy
+      const spyIndex = randomnumber(0, players.length - 1);
+      console.log(spyIndex);
+
+      // assign role to each players
+      players.forEach((e, i) => {
+        console.log(i);
+        // notify to each player
+        io.to(e).emit("randomed_role", {
+          msg: "Random Role Already " + e,
+          role: i == spyIndex ? { name: "spy" } : roles[i],
+          location: i == spyIndex ? "spy" : location,
+        });
+      });
+
     }
   });
 

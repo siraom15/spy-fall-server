@@ -18,8 +18,12 @@ const getPlayersInRoom = (io, roomId) => {
 
 const randomArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+const randomnumber = (maximum, minimum) =>
+  Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+
 module.exports = {
   getActiveRooms,
   getPlayersInRoom,
   randomArray,
+  randomnumber
 };
