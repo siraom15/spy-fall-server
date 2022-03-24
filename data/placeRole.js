@@ -1,7 +1,7 @@
 const placeRole = [
   {
     id: 1,
-    name: "Airplane",
+    location: "Airplane",
     roles: [
       {
         name: "First Class Passenger",
@@ -28,7 +28,7 @@ const placeRole = [
   },
   {
     id: 2,
-    name: "Bank",
+    location: "Bank",
     roles: [
       {
         name: "Armored Car Driver",
