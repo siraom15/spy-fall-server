@@ -3,7 +3,7 @@ const { Server } = require("socket.io");
 const app = require("./app");
 const debug = require("debug")("sv:server");
 const http = require("http");
-const port = normalizePort(process.env.PORT || "4000");
+const port = normalizePort(process.env.PORT || "3000");
 const {
   getPlayersInRoom,
   getActiveRooms,
