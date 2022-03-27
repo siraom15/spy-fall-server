@@ -1,52 +1,52 @@
 const placeRole = [
   {
     id: 1,
-    location: "airplane",
+    location: "location.airplane",
     roles: [
       {
-        name: "firstClassPassenger",
+        name: "roles.firstClassPassenger",
       },
       {
-        name: "airMarshall",
+        name: "roles.airMarshall",
       },
       {
-        name: "mechanic",
+        name: "roles.mechanic",
       },
       {
-        name: "economyClassPassenger",
+        name: "roles.economyClassPassenger",
       },
       {
-        name: "coPilot",
+        name: "roles.coPilot",
       },
       {
-        name: "captain",
+        name: "roles.captain",
       },
       {
-        name: "passenger",
+        name: "roles.passenger",
       },
     ],
   },
   {
     id: 2,
-    location: "Bank",
+    location: "location.Bank",
     roles: [
       {
-        name: "armoredCarDriver",
+        name: "roles.armoredCarDriver",
       },
       {
-        name: "manager",
+        name: "roles.manager",
       },
       {
-        name: "consultant",
+        name: "roles.consultant",
       },
       {
-        name: "customer",
+        name: "roles.customer",
       },
       {
-        name: "securityGuard",
+        name: "roles.securityGuard",
       },
       {
-        name: "teller",
+        name: "roles.teller",
       },
     ],
   },

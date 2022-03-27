@@ -176,8 +176,8 @@ io.on("connection", (socket) => {
         // notify to each player
         io.to(e).emit("randomed_role", {
           msg: "Random Role Already " + e,
-          role: i == spyIndex ? { name: "spy" } : roles[i],
-          location: i == spyIndex ? "spy" : location,
+          role: i == spyIndex ? { name: "roles.spy" } : roles[i],
+          location: i == spyIndex ? "location.spy" : location,
         });
       });
 
