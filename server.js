@@ -23,6 +23,8 @@ const io = new Server(server, {
   },
 });
 
+let socketNameMap = new Map();
+
 io.on("connection", (socket) => {
   console.log("a user connected : " + socket.id);
 
@@ -45,6 +47,7 @@ io.on("connection", (socket) => {
       // join
       await socket.join(data.roomId);
 
+      socketNameMap.set(socket.id, data.player.name);
       // init player
       const players = [
         {
@@ -86,8 +89,10 @@ io.on("connection", (socket) => {
         await socket.join(data.roomId);
 
         // update
+        socketNameMap.set(socket.id, data.player.name);
         const players = getPlayersInRoom(io, data.roomId).map((e) => ({
           socketId: e,
+          name: socketNameMap.get(e),
           isReady: false,
         }));
 
@@ -113,6 +118,7 @@ io.on("connection", (socket) => {
       const players = getPlayersInRoom(io, data.roomId)
         .filter((e) => e != socket.id)
         .map((e) => ({
+          name: socketNameMap.get(e),
           socketId: e,
           isReady: false,
         }));
@@ -180,7 +186,6 @@ io.on("connection", (socket) => {
           location: i == spyIndex ? "location.spy" : location,
         });
       });
-
     }
   });
 
@@ -200,7 +205,6 @@ io.on("connection", (socket) => {
       socket.to(data.roomId).emit("deleted_game", {
         msg: "Deleted game",
       });
-     
     }
   });
 
