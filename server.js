@@ -184,6 +184,26 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("update_play_time", async (data) => {
+    if (data) {
+      console.log(data);
+      socket.to(data.roomId).emit("updated_play_time", {
+        msg: "Updated play time",
+        playTime: data.playTime,
+      });
+    }
+  });
+
+  socket.on("delete_game", async (data) => {
+    if (data) {
+      console.log(data);
+      socket.to(data.roomId).emit("deleted_game", {
+        msg: "Deleted game",
+      });
+     
+    }
+  });
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
