@@ -178,7 +178,6 @@ io.on("connection", (socket) => {
 
       // assign role to each players
       players.forEach((e, i) => {
-        console.log(i);
         // notify to each player
         io.to(e).emit("randomed_role", {
           msg: "Random Role Already " + e,
