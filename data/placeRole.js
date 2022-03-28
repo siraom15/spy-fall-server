@@ -28,7 +28,7 @@ const placeRole = [
   },
   {
     id: 2,
-    location: "location.Bank",
+    location: "location.bank",
     roles: [
       {
         name: "roles.armoredCarDriver",
