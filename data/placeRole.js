@@ -52,22 +52,25 @@ const placeRole = [
     location: "location.beach",
     roles: [
       {
-        name: "roles.armoredCarDriver",
+        name: "roles.beachWaitress",
       },
       {
-        name: "roles.manager",
+        name: "roles.kiteSurfer",
       },
       {
-        name: "roles.consultant",
+        name: "roles.lifeguard",
       },
       {
-        name: "roles.customer",
+        name: "roles.thief",
       },
       {
-        name: "roles.securityGuard",
+        name: "roles.beachPhotographer",
       },
       {
-        name: "roles.teller",
+        name: "roles.iceCreamTruckDriver",
+      },
+      {
+        name: "roles.beachGoer",
       },
     ],
   },
@@ -75,22 +78,25 @@ const placeRole = [
     location: "location.cathedral",
     roles: [
       {
-        name: "roles.armoredCarDriver",
+        name: "roles.priest",
       },
       {
-        name: "roles.manager",
+        name: "roles.beggar",
       },
       {
-        name: "roles.consultant",
+        name: "roles.sinner",
       },
       {
-        name: "roles.customer",
+        name: "roles.tourist",
       },
       {
-        name: "roles.securityGuard",
+        name: "roles.sponsor",
       },
       {
-        name: "roles.teller",
+        name: "roles.chorister",
+      },
+      {
+        name: "roles.parishioner",
       },
     ],
   },
@@ -98,22 +104,25 @@ const placeRole = [
     location: "location.circusTent",
     roles: [
       {
-        name: "roles.armoredCarDriver",
+        name: "roles.acrobat",
       },
       {
-        name: "roles.manager",
+        name: "roles.animalTrainer",
       },
       {
-        name: "roles.consultant",
+        name: "roles.magician",
       },
       {
-        name: "roles.customer",
+        name: "roles.fireEater",
       },
       {
-        name: "roles.securityGuard",
+        name: "roles.clown",
       },
       {
-        name: "roles.teller",
+        name: "roles.juggler",
+      },
+      {
+        name: "roles.visitor",
       },
     ],
   },
@@ -121,22 +130,25 @@ const placeRole = [
     location: "location.corporateParty",
     roles: [
       {
-        name: "roles.armoredCarDriver",
+        name: "roles.entertainer",
       },
       {
         name: "roles.manager",
       },
       {
-        name: "roles.consultant",
+        name: "roles.unwantedGuest",
       },
       {
-        name: "roles.customer",
+        name: "roles.owner",
       },
       {
-        name: "roles.securityGuard",
+        name: "roles.secretary",
       },
       {
-        name: "roles.teller",
+        name: "roles.deliveryBoy",
+      },
+      {
+        name: "roles.accountant",
       },
     ],
   },
@@ -144,22 +156,25 @@ const placeRole = [
     location: "location.crusaderArmy",
     roles: [
       {
-        name: "roles.armoredCarDriver",
+        name: "roles.monk",
       },
       {
-        name: "roles.manager",
+        name: "roles.imprisonedSaracen",
       },
       {
-        name: "roles.consultant",
+        name: "roles.servant",
       },
       {
-        name: "roles.customer",
+        name: "roles.bishop",
       },
       {
-        name: "roles.securityGuard",
+        name: "roles.squire",
       },
       {
-        name: "roles.teller",
+        name: "roles.archer",
+      },
+      {
+        name: "roles.knight",
       },
     ],
   },
@@ -167,22 +182,25 @@ const placeRole = [
     location: "location.casino",
     roles: [
       {
-        name: "roles.armoredCarDriver",
+        name: "roles.bartender",
+      },
+      {
+        name: "roles.headSecurityGuard",
+      },
+      {
+        name: "roles.bouncer",
       },
       {
         name: "roles.manager",
       },
       {
-        name: "roles.consultant",
+        name: "roles.hustler",
       },
       {
-        name: "roles.customer",
+        name: "roles.dealer",
       },
       {
-        name: "roles.securityGuard",
-      },
-      {
-        name: "roles.teller",
+        name: "roles.gambler",
       },
     ],
   },
