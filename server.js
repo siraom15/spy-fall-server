@@ -161,6 +161,7 @@ io.on("connection", (socket) => {
       // notify to everyone
       io.to(data.roomId).emit("started_game", {
         msg: "Game Started",
+        playTime: data.playTime,
       });
 
       // get players in room
