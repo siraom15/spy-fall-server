@@ -208,6 +208,15 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("end_game", async (data) => {
+    if (data) {
+      console.log(data);
+      socket.to(data.roomId).emit("ended_game", {
+        msg: "Game Ended",
+      });
+    }
+  });
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
