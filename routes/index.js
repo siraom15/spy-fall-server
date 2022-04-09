@@ -7,7 +7,7 @@ router.get("/", function (req, res, next) {
     message: "Welcome to the API",
   });
 });
-router.get("/locations", function (req, res, next) {
+router.get("/api/locations", function (req, res, next) {
   res.status(200).json(placeRole);
 });
 module.exports = router;
