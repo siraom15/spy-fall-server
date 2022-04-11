@@ -98,7 +98,7 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-_You also need to install [serverside](https://github.com/siraom15/spy-fall-server)_
+_You also need to install [Client Side](https://github.com/siraom15/spy-fall-client)_
 
 1. Clone the repo
 
